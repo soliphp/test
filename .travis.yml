@@ -2,7 +2,7 @@ language: php
 
 cache:
   directories:
-    - $HOME/.composer/cache/files
+    - $HOME/.composer/cache
 
 php:
   - 5.5
@@ -23,10 +23,11 @@ matrix:
     - php: nightly
 
 install:
-  - composer install
+  - flags="--ansi --prefer-dist --no-interaction --optimize-autoloader --no-suggest --no-progress"
+  - composer install $flags
 
 before_script:
-  - composer require phpunit/phpunit squizlabs/php_codesniffer php-coveralls/php-coveralls --no-interaction --update-with-dependencies
+  - composer require phpunit/phpunit squizlabs/php_codesniffer php-coveralls/php-coveralls $flags
 
 script:
   - php vendor/bin/phpunit
