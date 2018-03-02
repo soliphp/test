@@ -1,0 +1,38 @@
+{
+    "name": "soliphp/di",
+    "description": "Soli Dependency Injection Container",
+    "type": "library",
+    "keywords": ["di", "container", "DependencyInjection", "soliphp"],
+    "homepage": "https://github.com/soliphp/di",
+    "support": {
+        "issues": "https://github.com/soliphp/di/issues",
+        "source": "https://github.com/soliphp/di"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ueaner",
+            "email": "ueaner@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "psr/container": "^1.0",
+        "php-coveralls/php-coveralls": "^2.0",
+        "phpunit/phpunit": "^7.0",
+        "squizlabs/php_codesniffer": "^3.2"
+    },
+    "provide": {
+        "psr/container-implementation": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Soli\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Soli\\Tests\\": "tests/"
+        }
+    }
+}
