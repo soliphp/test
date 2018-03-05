@@ -5,11 +5,11 @@ language: php
 
 env:
   global:
-    - COMPOSER_ARGS="--prefer-dist --no-interaction --no-suggest --no-progress --optimize-autoloader"
+    - COMPOSER_ARGS="--ansi --prefer-dist --no-interaction --no-suggest --no-progress --optimize-autoloader"
     - DEPS="phpunit/phpunit squizlabs/php_codesniffer php-coveralls/php-coveralls"
 
 git:
-  depth: 5
+  depth: 3
 
 cache:
   directories:
@@ -18,24 +18,19 @@ cache:
 matrix:
   fast_finish: true
   allow_failures:
-    - php: hhvm
     - php: nightly
   include:
-    - php: 5.5
-    - php: 5.6
-    - php: 7.0
     - php: 7.1
       env: ANALYSIS="true"
     - php: 7.2
-    - php: hhvm
     - php: nightly
 
 before_script:
-  - composer require $COMPOSER_ARGS $DEPS
+  - composer require --dev $COMPOSER_ARGS $DEPS
 
 script:
   - php vendor/bin/phpunit
   - if [[ "$ANALYSIS" == "true" ]]; then php vendor/bin/phpcs ; fi
 
 after_script:
-  - if [[ "$ANALYSIS" == "true" && -f ./build/logs/clover.xml ]]; then php vendor/bin/php-coveralls -v; fi
+  - if [[ "$ANALYSIS" == "true" ]]; then bash <(curl -s https://codecov.io/bash); fi
